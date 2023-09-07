@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship,Query
 from models.base import Base
 
 class User(Base):
@@ -23,7 +23,10 @@ class User(Base):
         self.age = age
 
     def get_reviews(self):
+        from review import Review
         return [review.review_text for review in self.reviews]
 
     def get_borrowings(self):
+        from book import Book
+        from borrowing import Borrowing
         return [(borrowing.book.name, borrowing.borrow_date, borrowing.return_date) for borrowing in self.borrowings]

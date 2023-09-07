@@ -1,5 +1,5 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String, ForeignKey, Float
+from sqlalchemy.orm import relationship, Query
 from .base import Base
 
 class Review(Base):
@@ -9,6 +9,7 @@ class Review(Base):
     user_id = Column(Integer, ForeignKey('users.id'))
     book_id = Column(Integer, ForeignKey('books.id'))
     review_text = Column(String)
+    rating = Column(Float)
 
    # Define relationships
     user = relationship('User', back_populates='reviews')
