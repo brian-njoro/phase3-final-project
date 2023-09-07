@@ -11,6 +11,11 @@ class User(Base):
     email = Column(String, unique = True)
     age = Column(Integer)
 
+    # Define relationships
+    reviews = relationship('Review', back_populates='user')
+    borrowings = relationship('Borrowing', back_populates='user')
+
+
     def __init__(self, name, phone_number, email, age):
         self.name = name
         self.phone_number = phone_number
