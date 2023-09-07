@@ -12,6 +12,10 @@ class Book(Base):
     num_pages = Column(Integer)
     author = Column(String)
 
+    # Define relationships
+    reviews = relationship('Review', back_populates='book')
+    borrowings = relationship('Borrowing', back_populates='book')
+
     def __init__(self, name, genre, num_pages, author):
         self.name = name
         self.genre = genre

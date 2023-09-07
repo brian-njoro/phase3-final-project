@@ -10,7 +10,9 @@ class Review(Base):
     book_id = Column(Integer, ForeignKey('books.id'))
     review_text = Column(String)
 
-   
+   # Define relationships
+    user = relationship('User', back_populates='reviews')
+    book = relationship('Book', back_populates='reviews')
 
     def __init__(self, user_id, book_id, review_text):
         self.user_id = user_id
