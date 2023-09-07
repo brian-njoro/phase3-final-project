@@ -1,8 +1,9 @@
 import datetime
 from sqlalchemy.orm import Session
-from models.user import User
 from models.book import Book
 from models.borrowing import Borrowing
+from models.user import User
+
 
 class LibraryService:
     def __init__(self, session: Session):
