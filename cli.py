@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker,Query
 from models.user import User
 from models.book import Book
 from create_db import get_db_session
-from .library_service import LibraryService
+from library_service import LibraryService
 
 # Initialize the LibraryService with the session
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=get_db_session())
