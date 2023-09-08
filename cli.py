@@ -1,5 +1,5 @@
 import click
-from sqlalchemy.orm import sessionmaker,Query
+from sqlalchemy.orm import sessionmaker
 from models.user import User
 from models.book import Book
 from create_db import get_db_session
@@ -7,17 +7,15 @@ from library_service import LibraryService
 
 # Initialize the LibraryService with the session
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=get_db_session())
+# session = SessionLocal()
 library_service = LibraryService(SessionLocal())
 
-#add borrowed book to a txt file
-def add_borrowed_book_entry(book_name,borrow_date, return_date):
-    #create the txt file on append mode
+# Function to add borrowed book entry to a text file
+def add_borrowed_book_entry(book_name, borrow_date, return_date):
     with open('borrowed_books.txt', 'a') as file:
-        #add info to be appended
         file.write(f"Book: {book_name}\n")
         file.write(f"Date Borrowed: {borrow_date}\n")
         file.write(f"Date Due for Return: {return_date}\n\n")
-
 
 @click.group()
 def main():
@@ -26,7 +24,7 @@ def main():
 @main.command()
 def list_books():
     """List all available books."""
-    books = Book.list_all_books()
+    books = Book.list_all_books(session)
     for book in books:
         print(book)
 

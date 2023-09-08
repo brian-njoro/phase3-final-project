@@ -1,10 +1,8 @@
-from create_db import get_db_session, SessionLocal  # Import SessionLocal from create_db.py
 from models.book import Book
+from cli import session
 
 try:
-    # Create a new session
-    session = SessionLocal()
-
+   
     # Define book instances to add
     books_to_add = [
         Book(name='ASOIAF', genre='Fiction', num_pages=300, author='George R.R Martin'),
