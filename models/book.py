@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship,Query
-from .base import Base
+from models.base import Base
 
 
 class Book(Base):
@@ -23,18 +23,16 @@ class Book(Base):
         self.author = author
 
     @classmethod
-    def list_all_books(cls,session):
-        from create_db import get_db_session
-        session = get_db_session
+    def list_all_books(cls, session):
         all_books = session.query(cls).all()
         book_list = []
 
         for book in all_books:
-            book_dict = {
-                'name': book.name,
-                'author': book.author,
-                'genre': book.genre,
-                'num_pages': book.num_pages
-            }
-            book_list.append(book_dict)
+           book_dict = {
+            'name': book.name,
+            'author': book.author,
+            'genre': book.genre,
+            'num_pages': book.num_pages
+        }
+        book_list.append(book_dict)
         return book_list
