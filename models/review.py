@@ -11,10 +11,6 @@ class Review(Base):
     review_text = Column(String)
     rating = Column(Float)
 
-   # Define relationships
-    user = relationship('User', back_populates='reviews')
-    book = relationship('Book', back_populates='reviews')
-
     def __init__(self, user_id, book_id, review_text):
         self.user_id = user_id
         self.book_id = book_id
@@ -27,3 +23,10 @@ class Review(Base):
             return sum(ratings) / len(ratings)
         else:
             return 0.0
+        
+     # Define relationships
+    user = relationship('User', back_populates='reviews')
+    book = relationship('Book', back_populates='reviews')
+
+    from models.book import Book
+    

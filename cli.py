@@ -36,7 +36,7 @@ def borrow_book(user_id, book_id):
     if user is None:
         print(f"User with ID {user_id} not found")
         return
-    book = session.query.get(book_id)
+    book = session.query(Book).get(book_id)
     if book is None:
         print(f"book with id {book_id} not found")
         return

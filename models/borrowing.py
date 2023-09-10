@@ -10,13 +10,13 @@ class Borrowing(Base):
     book_id = Column(Integer, ForeignKey('books.id'))
     borrow_date = Column(Date)
     return_date = Column(Date)
-
-   # Define relationships
-    user = relationship('User', back_populates='borrowings')
-    book = relationship('Book', back_populates='borrowings')
     
     def __init__(self, user_id, book_id, borrow_date, return_date):
         self.user_id = user_id
         self.book_id = book_id
         self.borrow_date = borrow_date
         self.return_date = return_date
+
+    # Define relationships
+    user = relationship('User', back_populates='borrowings')
+    book = relationship('Book', back_populates='borrowings')

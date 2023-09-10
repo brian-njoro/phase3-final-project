@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship,Query
 from models.base import Base
+from models.review import Review
 
 class User(Base):
     __tablename__ = 'users'
@@ -10,11 +11,6 @@ class User(Base):
     phone_number = Column(String, unique=True)
     email = Column(String, unique = True)
     age = Column(Integer)
-
-    # Define relationships
-    reviews = relationship('Review', back_populates='user')
-    borrowings = relationship('Borrowing', back_populates='user')
-
 
     def __init__(self, name, phone_number, email, age):
         self.name = name
@@ -30,3 +26,7 @@ class User(Base):
         from book import Book
         from borrowing import Borrowing
         return [(borrowing.book.name, borrowing.borrow_date, borrowing.return_date) for borrowing in self.borrowings]
+    
+    # Define relationships
+    reviews = relationship('Review', back_populates='user')
+    borrowings = relationship('Borrowing', back_populates='user')

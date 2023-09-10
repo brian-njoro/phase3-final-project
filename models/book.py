@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship, Query
 from models.base import Base
+from models.borrowing import Borrowing 
 
 
 class Book(Base):
@@ -15,6 +16,7 @@ class Book(Base):
     # Define relationships
     reviews = relationship('Review', back_populates='book')
     borrowings = relationship('Borrowing', back_populates='book')
+
 
     def __init__(self, name, genre, num_pages, author):
         self.name = name
@@ -36,3 +38,5 @@ class Book(Base):
             }
             book_list.append(book_dict)
         return book_list
+    
+    
