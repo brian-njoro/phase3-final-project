@@ -1,5 +1,7 @@
 from models.book import Book
-from cli import session
+from cli import get_db_session
+
+session = get_db_session()
 
 try:
    

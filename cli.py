@@ -1,14 +1,13 @@
 import click
-from sqlalchemy.orm import sessionmaker,Session
+from sqlalchemy.orm import Session
 from models.user import User
 from models.book import Book
 from create_db import get_db_session
 from library_service import LibraryService
 
 # Initialize the LibraryService with the session
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=get_db_session())
-session = SessionLocal()
-library_service = LibraryService(SessionLocal())
+session = get_db_session()
+library_service = LibraryService(session)
 
 # Function to add borrowed book entry to a text file
 def add_borrowed_book_entry(book_name, borrow_date, return_date):
@@ -33,8 +32,14 @@ def list_books():
 @click.option('--book-id', prompt='Enter book ID', type=int)
 def borrow_book(user_id, book_id):
     """Borrow a book."""
-    user = User.query.get(user_id)
-    book = Book.query.get(book_id)
+    user = session.query(User).get(user_id)
+    if user is None:
+        print(f"User with ID {user_id} not found")
+        return
+    book = session.query.get(book_id)
+    if book is None:
+        print(f"book with id {book_id} not found")
+        return
     borrow_date = '2023-09-10'
     return_date = '2023-10-10'
     library_service.borrow_book(user, book)
@@ -48,12 +53,3 @@ def borrow_book(user_id, book_id):
 if __name__ == '__main__':
     main()
     
-# # Obtain a raw database connection
-# from sqlalchemy import create_engine
-
-# engine = create_engine("sqlite:///library.db")
-# conn = engine.connect()
-
-
-# #  close the connection 
-# conn.close()

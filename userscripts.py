@@ -1,5 +1,9 @@
 from models.user import User
-from cli import session
+from sqlalchemy.orm import sessionmaker
+from create_db import get_db_session
+
+# Create a new session for adding users
+session = get_db_session()
 
 try:
    
