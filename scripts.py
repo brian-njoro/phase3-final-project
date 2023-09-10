@@ -23,6 +23,8 @@ try:
         Book(name='Hamlet', genre='Romance', num_pages=240, author='Wiliam Shakespear'),
     ]
 
+
+
     # Add books to the session
     for book in books_to_add:
         session.add(book)
@@ -39,7 +41,7 @@ try:
         User(name='Emily Wilson', phone_number='456-789-0123', email='emily.wilson@example.com', age=28),
         User(name='Michael Brown', phone_number='567-890-1234', email='michael.brown@example.com', age=35),
         User(name='Sophia Lee', phone_number='678-901-2345', email='sophia.lee@example.com', age=32),
-        User(name='William Davis', phone_number='789-012-3456', email='william.davis@example.com', age=27),
+        User(name='Brian Njoroge', phone_number='789-012-3456', email='william.davis@example.com', age=27),
         User(name='Olivia Martinez', phone_number='890-123-4567', email='olivia.martinez@example.com', age=29),
         User(name='James Garcia', phone_number='901-234-5678', email='james.garcia@example.com', age=33),
         User(name='Ava Rodriguez', phone_number='012-345-6789', email='ava.rodriguez@example.com', age=31),
@@ -54,6 +56,14 @@ try:
         User(name='Henry Lee', phone_number='990-011-2233', email='henry.lee@example.com', age=27),
         User(name='Benjamin Wilson', phone_number='001-122-3344', email='benjamin.wilson@example.com', age=26)
     ]
+
+    #add user instances
+    for user in users_to_add:
+        session.add(user)
+
+    #commit to the database
+    session.commit()
+    print("users added successfully!")
 
 except Exception as e:
     print(f"An error occurred: {e}")
